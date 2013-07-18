@@ -3,14 +3,7 @@ var handView = Backbone.View.extend({
   tagName:'ul',
 
   initialize: function(){
-    // var self = this;
-    //debugger;
     this.render();
-    // console.log(this.collection);
-    // this.collection.on('add', function(){
-    //   // self.render();
-    // });
-    // return this.render();
   },
 
   render: function(){
@@ -24,12 +17,6 @@ var handView = Backbone.View.extend({
     }, this);
 
     return this;
-
-    // this.$el.append(this.collection.map(function(card){
-    //   return new CardView({
-    //     model:card
-    //   }).$el;
-    // }));
   }
 
 
