@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+ <meta charset="utf-8">
+ <title>Poker App</title>
+</head>
+<body>
+
+
+
+<script id="cardTemplate" type="text/template">
+  <%= number %> and <%= suit %>
+</script>
+
+<script id="mainScreen" type="text/template">
+  <button class="hit-button">Hit</button> <button class="stand-button">Stand</button>
+  <div class="player-hand-container"></div>
+  <div class="dealer-hand-container"></div>
+</script>
+
+<script src="assets/js/libs/jquery.js"></script>
+<script src="assets/js/libs/underscore.js"></script>
+<script src="assets/js/libs/backbone.js"></script>
+<script src="assets/js/models/App.js"></script>
+<script src="assets/js/models/Card.js"></script>
+<script src="assets/js/views/Appview.js"></script>
+<script src="assets/js/views/Cardview.js"></script>
+<script src="assets/js/views/handView.js"></script>
+<script src="assets/js/collections/Deck.js"></script>
+<script src="assets/js/collections/Hand.js"></script>
+<script src="assets/js/scripts.js"></script>
+</body>
+</html>
