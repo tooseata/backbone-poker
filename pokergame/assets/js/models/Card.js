@@ -1,4 +1,4 @@
-window.Card = Backbone.Model.extend({
+var Card = Backbone.Model.extend({
   
   // Do I need a validate myself?
   // Only validate when you set to a method

@@ -1,4 +1,4 @@
-window.handView = Backbone.View.extend({
+var handView = Backbone.View.extend({
 
   tagName:'ul',
 

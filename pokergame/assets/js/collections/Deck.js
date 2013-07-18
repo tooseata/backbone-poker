@@ -1,4 +1,4 @@
-window.Deck = Backbone.Collection.extend({
+var Deck = Backbone.Collection.extend({
   model: Card,
 
   initialize: function(){
@@ -24,10 +24,10 @@ window.Deck = Backbone.Collection.extend({
   },
 
   dealPlayer: function() {
-    return [this.pop(), this.pop(), this.pop(), this.pop(), this.pop()];
+    return [this.pop().toJSON(), this.pop().toJSON(), this.pop().toJSON(),this.pop().toJSON(), this.pop().toJSON()];
   },
 
   dealDealer: function() {
-    return [this.pop(), this.pop(), this.pop(), this.pop(), this.pop()];
+    return [this.pop().toJSON(), this.pop().toJSON(), this.pop().toJSON(), this.pop().toJSON(), this.pop().toJSON()];
   }
 });

@@ -1,4 +1,4 @@
-window.Cardview = Backbone.View.extend({
+var Cardview = Backbone.View.extend({
   tagName:'li',
   className: 'cardclass',
   id: 'foo',
@@ -16,7 +16,7 @@ window.Cardview = Backbone.View.extend({
   render: function(){
     //console.log('I take your template and group it with your associated data');
     // this.$el.html(this.model.get('number'));
-    this.$el.html(this.template(this.model.toJSON()) );
+    this.$el.html(this.template(this.model) );
     return this;
   }
 

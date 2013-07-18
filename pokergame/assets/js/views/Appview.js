@@ -1,4 +1,4 @@
-window.AppView = Backbone.View.extend({
+var AppView = Backbone.View.extend({
   template: _.template($('#mainScreen').html() ),
 
   initialize: function(){
