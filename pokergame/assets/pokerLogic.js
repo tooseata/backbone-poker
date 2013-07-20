@@ -14,18 +14,17 @@ var gameHands2 = [fourOfKind_set,fullHouse_set,straightFlush_set2];
 // var gameHands1 = [straightFlush1,straightFlush2]
 
 // TODO
-var poker = function (hands) {
-  //debugger;
-  var result = {};
-  for (var i = 0; i < hands.length; i++){
-    var place = hand_rank(hands[i]);
-    result[i] = place;
-  }
-  console.log(result);
-  var x = _.max(result,function(hand){
-    return hand[0];
-  });
-};
+// var poker = function (hands) {
+//   var result = {};
+//   for (var i = 0; i < hands.length; i++){
+//     var place = hand_rank(hands[i]);
+//     result[i] = place;
+//   }
+//   debugger;
+//   var x = _.max(result,function(hand){
+//     return hand[0];
+//   });
+// };
 
 var highestCard = function (hand) {
   if(Object.prototype.toString.call(hand) === "[object Array]"){
@@ -41,7 +40,6 @@ var highestCard = function (hand) {
 
 // Return a list of ranks, sorted with a higher first
 var card_ranks = function (hand){
-  
 // Write a function to handle a wheel straight by returning [5,4,3,2,1] from [14,5,4,3,2] #TODO
 // Take in an array of object and returns an a sorted array for all the card values.
   return _.pluck(hand, 'Card').sort(function(a,b){
@@ -120,7 +118,6 @@ var two_pair = function(ranks){
 // two_pair(straightFlush) = none
 
 var hand_rank =  function (hand) {
-  debugger;
 // Return a data structure.
 // The first element of the returned result represents the rank order.
 // The second element of is designed to break ties between similar groupings

@@ -8,6 +8,15 @@ window.Main = {
 
 // Collections
 
+Main.Collections.handCollection = Backbone.Collection.extend({
+  model: Main.Models.Card,
+
+  initialize: function(){
+    // this.add(this.defaults());
+  }
+
+});
+
 Main.Collections.Deck = Backbone.Collection.extend({
   model: Main.Models.Card,
 
@@ -32,11 +41,14 @@ Main.Collections.Deck = Backbone.Collection.extend({
   },
 
   dealPlayer: function() {
-    return [this.pop().toJSON(), this.pop().toJSON(), this.pop().toJSON(),this.pop().toJSON(), this.pop().toJSON()];
+    //debugger;
+    //var arr = this.slice(0,5) //splice? console.log
+    return new Main.Collections.handCollection([this.pop(), this.pop(), this.pop(),this.pop(), this.pop()]);
+    // return [this.pop().toJSON(), this.pop().toJSON(), this.pop().toJSON(),this.pop().toJSON(), this.pop().toJSON()];
   },
 
   dealDealer: function() {
-    return [this.pop().toJSON(), this.pop().toJSON(), this.pop().toJSON(), this.pop().toJSON(), this.pop().toJSON()];
+    //return [this.pop().toJSON(), this.pop().toJSON(), this.pop().toJSON(), this.pop().toJSON(), this.pop().toJSON()];
   }
 });
 
@@ -82,19 +94,21 @@ Main.Views.handView = Backbone.View.extend({
 
   initialize: function(){
     this.render();
+    //this.collection = new Main.Collections.handCollection
   },
 
   render: function(){
-debugger;
     // filter through all items in a collection
-    this.collection.forEach(function(Card){
+    debugger;
+    _.each(this.collection, function(card){
+      //debugger;
+      console.log("Card", card);
       // for each, create a new CardView
-      var cardview = new Main.Views.Cardview({model:Card});
+      var cardview = new Main.Views.Cardview({model:card});
+      console.log('CardView',cardview);
       // append to root element
       this.$el.append(cardview.render().el);
     }, this);
-
-    return this;
   }
 
 
@@ -106,8 +120,11 @@ Main.Views.Cardview = Backbone.View.extend({
   id: 'foo',
   template: _.template($('#cardTemplate').html()),
 
+  initialize: function(){
+  },
+
   render: function(){
-    this.$el.html(this.template(this.model) );
+    this.$el.html(this.template(this.model.toJSON()) );
     return this;
   }
 
@@ -115,5 +132,7 @@ Main.Views.Cardview = Backbone.View.extend({
 
 window.app = new Main.Views.AppView({model: new Main.Models.App()}).$el.appendTo('body');
 
-}); // END IFFIE
+var handview = new Main.Views.handView({collection:handCollection});
+
+}); // END 
 
