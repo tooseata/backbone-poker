@@ -1,26 +1,42 @@
 
 // Data Structure Examples 
-var straightFlush = [{Suite : 'Clubs', Card : 6}, {Suite : 'Clubs', Card : 7}, {Suite : 'Clubs', Card : 8},{Suite : 'Clubs', Card : 9}, {Suite : 'Clubs', Card : 10}];
-var flush = [{Suite : 'Diamond', Card : 9}, {Suite : 'Diamond', Card : 10}, {Suite : 'Diamond', Card : 2},{Suite : 'Diamond', Card : 3}, {Suite : 'Hearts', Card : 9}];
-var fourOfKind = [{Suite : 'Diamond', Card : 12}, {Suite : 'Clubs', Card : 12}, {Suite : 'Hearts', Card : 12},{Suite : 'Spade', Card : 12}, {Suite : 'Diamond', Card : 7}];
-var fullHouse = [{Suite : 'Diamond', Card : 10}, {Suite : 'Clubs', Card : 10}, {Suite : 'Hearts', Card : 10},{Suite : 'Clubs', Card : 7}, {Suite : 'Diamond', Card : 7}];
-var twoPair = [{Suite : 'Diamond', Card : 12}, {Suite : 'Clubs', Card : 12}, {Suite : 'Hearts', Card : 11},{Suite : 'Hearts', Card : 11}, {Suite : 'Diamond', Card : 7}];
+var straightFlush_set = [{Suite : 'Clubs', Card : 6}, {Suite : 'Clubs', Card : 7}, {Suite : 'Clubs', Card : 8},{Suite : 'Clubs', Card : 9}, {Suite : 'Clubs', Card : 10}];
+var straightFlush_set2 = [{Suite : 'Clubs', Card : 7}, {Suite : 'Clubs', Card : 8}, {Suite : 'Clubs', Card : 9},{Suite : 'Clubs', Card : 10}, {Suite : 'Clubs', Card : 11}];
+var straight_set = [{Suite : 'Clubs', Card : 6}, {Suite : 'Clubs', Card : 7}, {Suite : 'Clubs', Card : 8},{Suite : 'Clubs', Card : 9}, {Suite : 'Hearts', Card : 10}];
+var flush_set = [{Suite : 'Diamond', Card : 9}, {Suite : 'Diamond', Card : 10}, {Suite : 'Diamond', Card : 2},{Suite : 'Diamond', Card : 3}, {Suite : 'Hearts', Card : 9}];
+var fourOfKind_set = [{Suite : 'Diamond', Card : 12}, {Suite : 'Clubs', Card : 12}, {Suite : 'Hearts', Card : 12},{Suite : 'Spade', Card : 12}, {Suite : 'Diamond', Card : 7}];
+var fullHouse_set = [{Suite : 'Diamond', Card : 10}, {Suite : 'Clubs', Card : 10}, {Suite : 'Hearts', Card : 10},{Suite : 'Clubs', Card : 7}, {Suite : 'Diamond', Card : 7}];
+var twoPair_set = [{Suite : 'Diamond', Card : 12}, {Suite : 'Clubs', Card : 12}, {Suite : 'Hearts', Card : 11},{Suite : 'Hearts', Card : 11}, {Suite : 'Diamond', Card : 7}];
 
 
-// var gameHands = [straightFlush,fourOfAKind,fullHouse]
+var gameHands = [straightFlush_set,fourOfKind_set,fullHouse_set,straightFlush_set2];
+var gameHands2 = [fourOfKind_set,fullHouse_set,straightFlush_set2];
 // var gameHands1 = [straightFlush1,straightFlush2]
 
 // TODO
 var poker = function (hands) {
-  return _.max(hands,function(hand){
-  return hand.Card;
-});
+  //debugger;
+  var result = {};
+  for (var i = 0; i < hands.length; i++){
+    var place = hand_rank(hands[i]);
+    result[i] = place;
+  }
+  console.log(result);
+  var x = _.max(result,function(hand){
+    return hand[0];
+  });
 };
 
 var highestCard = function (hand) {
-  return _.max(hand,function(hand){
+  if(Object.prototype.toString.call(hand) === "[object Array]"){
+    hand.sort(function(a,b){return a-b});
+    return hand[hand.length-1];
+  } else {
+   return _.max(hand,function(hand){
     return hand.Card;
-  });
+   });
+  }
+  
 };
 
 // Return a list of ranks, sorted with a higher first
@@ -104,6 +120,7 @@ var two_pair = function(ranks){
 // two_pair(straightFlush) = none
 
 var hand_rank =  function (hand) {
+  debugger;
 // Return a data structure.
 // The first element of the returned result represents the rank order.
 // The second element of is designed to break ties between similar groupings
@@ -113,14 +130,14 @@ var hand_rank =  function (hand) {
 // This returns cards in max order as array
 var ranks = card_ranks(hand);
 var results;
-var higestCard;
+var highCard;
 
 // Straight Flush. Rank 8
 if (straight(ranks) && flush(hand)){
-  highestCard = highestCard(ranks);
+  highCard = highestCard(ranks);
   results = [];
     results[0] = 8;
-    results[1] = highestCard;
+    results[1] = highCard;
   return results;
   }
 
@@ -143,7 +160,7 @@ else if (kind(3, ranks) && kind(2, ranks)){
 }
 
 // Flush
-else if (flush(rank)){
+else if (flush(hand)){
   results = [];
   results[0] = 5;
   results[1] = ranks;
@@ -151,17 +168,16 @@ else if (flush(rank)){
 }
 
 // Stright
-else if (straight(rank)){
-  higestCard = highestCard(ranks);
+else if (straight(ranks)){
+  highCard = highestCard(ranks);
   results = [];
   results[0] = 4;
-  results[1] = higestCard;
+  results[1] = highCard;
   return results;
 }
 
 // Three of a kind
-else if (kind(3, rank)){
-  higestCard = highestCard(ranks);
+else if (kind(3, ranks)){
   results = [];
   results[0] = 3;
   results[1] = kind(3, ranks);
@@ -170,7 +186,7 @@ else if (kind(3, rank)){
 }
 
 // Two Pairs
-else if (two_pair(rank)){
+else if (two_pair(ranks)){
   results = [];
   results[0] = 2;
   results[1] = two_pair(ranks);
@@ -179,7 +195,7 @@ else if (two_pair(rank)){
 }
 
 // One of a Kind
-else if (kind(2, rank)){
+else if (kind(2, ranks)){
   results = [];
   results[0] = 1;
   results[1] = kind(2, ranks);

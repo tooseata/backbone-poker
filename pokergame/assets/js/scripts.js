@@ -85,7 +85,7 @@ Main.Views.handView = Backbone.View.extend({
   },
 
   render: function(){
-
+debugger;
     // filter through all items in a collection
     this.collection.forEach(function(Card){
       // for each, create a new CardView
